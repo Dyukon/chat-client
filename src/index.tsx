@@ -3,22 +3,12 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import { ApolloClient, ApolloProvider, gql, InMemoryCache } from '@apollo/client'
+import { BrowserRouter, Router } from 'react-router-dom'
 
 const client = new ApolloClient({
   uri: 'http://localhost:3000/graphql',
   cache: new InMemoryCache()
 })
-
-console.log(`*** before query`)
-
-client.query({
-  query: gql`
-    query GetTime {
-      time
-    }
-  `
-})
-.then((result) => console.log(`*** query result: ${JSON.stringify(result)}`));
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -26,6 +16,8 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <ApolloProvider client={client}>
-    <App/>
+    <BrowserRouter>
+      <App/>
+    </BrowserRouter>
   </ApolloProvider>
 )

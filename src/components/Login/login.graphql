@@ -1,0 +1,32 @@
+mutation signupUser(
+  $name: String!
+  $email: String!
+  $password: String!
+) {
+  createUser(
+    params: {
+      name: $name
+      email: $email
+      password: $password
+    }
+  ) {
+    id
+    name
+    email
+    hashedPassword
+  }
+}
+
+mutation loginUser(
+  $email: String!
+  $password: String!
+) {
+  loginUser(
+    params: {
+      email: $email
+      password: $password
+    }
+  ) {
+    accessToken
+  }
+}
