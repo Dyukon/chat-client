@@ -6,9 +6,10 @@ import Chat from './components/Chat/Chat'
 import Header from './components/Header/Header'
 import { useAppSelector } from './hooks'
 import './App.css'
+import { selectAuthToken } from './features/authSlice'
 
 function App() {
-  const token = useAppSelector((state) => state.auth.token)
+  const token = useAppSelector(selectAuthToken)
   console.log(`App - token: ${token}`)
 
   return (

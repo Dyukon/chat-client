@@ -5,20 +5,22 @@ import './Chat.css'
 import ChatProps from './Chat.props'
 import cn from 'classnames'
 import { useQuery } from '@apollo/client'
-import { GetCurrentUserDocument } from '../../gql/graphql'
-import { gotInfo } from '../../features/auth/authSlice'
+import { GetCurrentUserInfoDocument, Message } from '../../gql/graphql'
+import { gotInfo } from '../../features/authSlice'
 import { useAppDispatch } from '../../hooks'
+import { setMessages } from '../../features/chatSlice'
 
 const Chat = (props: ChatProps): JSX.Element => {
   const dispatch = useAppDispatch()
 
-  const { loading, error } = useQuery(GetCurrentUserDocument, {
-    onCompleted: ({ currentUser }) => {
-      console.log(`currentUser completed - currentUser: ${JSON.stringify(currentUser)}`)
+  const { loading, error } = useQuery(GetCurrentUserInfoDocument, {
+    onCompleted: ({ currentUser, messages }) => {
+      console.log(`currentUserInfo completed - currentUser: ${JSON.stringify(currentUser)}, messages: ${JSON.stringify(messages)}`)
       dispatch(gotInfo({
         userId: currentUser.id,
         userName: currentUser.name
       }))
+      dispatch(setMessages(messages))
     },
   })
 

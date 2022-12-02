@@ -4,6 +4,7 @@
   grid-template-columns: 1fr auto auto;
   grid-template-areas:
     ". username logout";
+  align-items: center;
 }
 
 .header_username {

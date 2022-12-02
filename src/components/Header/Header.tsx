@@ -1,5 +1,5 @@
 import React from 'react'
-import { logout } from '../../features/auth/authSlice'
+import { logout, selectAuthToken, selectUserName } from '../../features/authSlice'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { Button } from '@mui/material'
 import './Header.css'
@@ -7,8 +7,8 @@ import HeaderProps from './Header.props'
 import cn from 'classnames'
 
 const Header = (props: HeaderProps): JSX.Element => {
-  const authToken = useAppSelector((state) => state.auth.token)
-  const userName = useAppSelector((state) => state.auth.userName)
+  const authToken = useAppSelector(selectAuthToken)
+  const userName = useAppSelector(selectUserName)
   const dispatch = useAppDispatch()
 
   return (

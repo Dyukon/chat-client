@@ -40,7 +40,7 @@
 .app_wrapper {
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: auto minmax(400px, 600px) auto;
+  grid-template-columns: auto minmax(200px, 600px) auto;
   grid-template-rows: auto 1fr;
   grid-template-areas:
     "app_header app_header app_header"

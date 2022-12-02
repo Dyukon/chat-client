@@ -1,7 +1,16 @@
-query GetCurrentUser {
+query GetCurrentUserInfo {
   currentUser {
     id
     name
+  }
+  messages(params: {
+
+  }) {
+    id
+    text
+    createdAt
+    senderId
+    senderName
   }
 }
 

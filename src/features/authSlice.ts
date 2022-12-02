@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../../store'
-import { AUTH_TOKEN } from '../../constants'
+import { RootState } from '../store'
+import { AUTH_TOKEN } from '../constants'
 
 interface AuthState {
   token: string,
@@ -32,7 +32,9 @@ export const authSlice = createSlice({
       console.log(`logout action`)
       return {
         ...state,
-        token: ''
+        token: '',
+        userId: '',
+        userName: ''
       }
     },
     gotInfo: (
@@ -53,5 +55,6 @@ export const authSlice = createSlice({
 export const { login, logout, gotInfo } = authSlice.actions
 
 export const selectAuthToken = (state: RootState) => state.auth.token
+export const selectUserName = (state: RootState) => state.auth.userName
 
 export default authSlice.reducer

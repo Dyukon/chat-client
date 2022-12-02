@@ -7,7 +7,7 @@ import {
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { LoginUserDocument, SignupUserDocument } from '../../gql/graphql'
-import { login } from '../../features/auth/authSlice'
+import { login } from '../../features/authSlice'
 import { useAppDispatch } from '../../hooks'
 import LoginProps from './Login.props'
 import './Login.css'

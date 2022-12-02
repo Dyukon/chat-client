@@ -1,0 +1,24 @@
+.message_wrapper {
+  border-radius: 10px;
+  margin: 5px;
+  padding: 5px;
+  background: white;
+}
+
+.message_top {
+  font-size: 12px;
+}
+
+.message_sender {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.message_time {
+  display: inline-block;
+  float: right;
+}
+
+.message_text {
+
+}

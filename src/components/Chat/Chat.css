@@ -2,7 +2,7 @@
   display: grid;
   grid-auto-flow: column;
   justify-items: center;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 100px 300px 200px;
   grid-template-areas:
     "header"
     "display"
@@ -15,6 +15,8 @@
 
 .chat_display {
   grid-area: display;
+  overflow-y: scroll;
+  /*max-height: calc(100% - 300px);*/
 }
 
 .chat_sender {
