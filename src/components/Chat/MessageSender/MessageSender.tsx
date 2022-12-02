@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { SendMessageDocument } from '../../../gql/graphql'
 import { useMutation } from '@apollo/client'
 import MessageSenderProps from './MessageSender.props'
+import './MessageSender.css'
 
 const MessageSender = (props: MessageSenderProps): JSX.Element => {
 
@@ -31,7 +32,7 @@ const MessageSender = (props: MessageSenderProps): JSX.Element => {
   })
 
   return (
-    <Container maxWidth="xs">
+    <Container className='sender_wrapper' maxWidth="xs">
       <form>
         <TextField
           variant="outlined"

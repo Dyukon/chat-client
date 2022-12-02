@@ -13,14 +13,14 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "mutation SendMessage($text: String!) {\n  createMessage(params: {text: $text}) {\n    id\n    text\n  }\n}": types.SendMessageDocument,
+    "query GetCurrentUser {\n  currentUser {\n    id\n    name\n  }\n}\n\nmutation SendMessage($text: String!) {\n  createMessage(params: {text: $text}) {\n    id\n    text\n  }\n}": types.GetCurrentUserDocument,
     "mutation signupUser($name: String!, $email: String!, $password: String!) {\n  createUser(params: {name: $name, email: $email, password: $password}) {\n    accessToken\n  }\n}\n\nmutation loginUser($email: String!, $password: String!) {\n  loginUser(params: {email: $email, password: $password}) {\n    accessToken\n  }\n}": types.SignupUserDocument,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "mutation SendMessage($text: String!) {\n  createMessage(params: {text: $text}) {\n    id\n    text\n  }\n}"): (typeof documents)["mutation SendMessage($text: String!) {\n  createMessage(params: {text: $text}) {\n    id\n    text\n  }\n}"];
+export function graphql(source: "query GetCurrentUser {\n  currentUser {\n    id\n    name\n  }\n}\n\nmutation SendMessage($text: String!) {\n  createMessage(params: {text: $text}) {\n    id\n    text\n  }\n}"): (typeof documents)["query GetCurrentUser {\n  currentUser {\n    id\n    name\n  }\n}\n\nmutation SendMessage($text: String!) {\n  createMessage(params: {text: $text}) {\n    id\n    text\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

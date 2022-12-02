@@ -1,3 +1,10 @@
+query GetCurrentUser {
+  currentUser {
+    id
+    name
+  }
+}
+
 mutation SendMessage($text: String!) {
   createMessage(params: {
     text: $text

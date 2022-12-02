@@ -10,6 +10,7 @@ import { LoginUserDocument, SignupUserDocument } from '../../gql/graphql'
 import { login } from '../../features/auth/authSlice'
 import { useAppDispatch } from '../../hooks'
 import LoginProps from './Login.props'
+import './Login.css'
 
 const Login = (props: LoginProps): JSX.Element => {
   const dispatch = useAppDispatch()
@@ -60,8 +61,8 @@ const Login = (props: LoginProps): JSX.Element => {
   })
 
   return (
-    <Container maxWidth="xs">
-      <Typography variant="h3">
+    <Container className={props.className}>
+      <Typography className='login_header' variant="h3">
         {formState.login ? 'Login' : 'Sign Up'}
       </Typography>
 

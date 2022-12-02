@@ -1,18 +1,22 @@
-.wrapper {
+.chat_wrapper {
   display: grid;
-  grid-template-rows: 100px auto 100px;
+  grid-auto-flow: column;
+  justify-items: center;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
-    "header display sender";
+    "header"
+    "display"
+    "sender";
 }
 
-.header {
+.chat_header {
   grid-area: header;
 }
 
-.display {
+.chat_display {
   grid-area: display;
 }
 
-.sender {
+.chat_sender {
   grid-area: sender;
 }
