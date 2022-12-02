@@ -10,10 +10,7 @@ mutation signupUser(
       password: $password
     }
   ) {
-    id
-    name
-    email
-    hashedPassword
+    accessToken
   }
 }
 

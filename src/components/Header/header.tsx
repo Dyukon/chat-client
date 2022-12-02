@@ -1,20 +1,29 @@
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { AUTH_TOKEN } from '../../constants'
+import { logout, testAction } from '../../features/auth/authSlice'
+import { useAppDispatch, useAppSelector } from '../../hooks'
+import { Button } from '@mui/material'
 
 const Header = () => {
-  const navigate = useNavigate()
-  const authToken = localStorage.getItem(AUTH_TOKEN)
+  const authToken = useAppSelector((state) => state.auth.token)
+  const dispatch = useAppDispatch()
+
   return (
     <div className="flex pa1 justify-between nowrap orange">
       <div className="flex flex-fixed black">
-        <Link
-          to="/login"
-          className="ml1 no-underline black"
+        {authToken && <Button
+          fullWidth
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            console.log(`Logout clicked`)
+            dispatch(logout())
+            dispatch(testAction())
+          }}
         >
-          login
-        </Link>
+          Logout
+        </Button>}
       </div>
+
     </div>
   )
 }
