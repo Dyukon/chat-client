@@ -2,18 +2,20 @@ import React from 'react'
 import { logout, testAction } from '../../features/auth/authSlice'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { Button } from '@mui/material'
+import './Header.css'
+import HeaderProps from './Header.props'
 
-const Header = () => {
+const Header = (props: HeaderProps): JSX.Element => {
   const authToken = useAppSelector((state) => state.auth.token)
   const dispatch = useAppDispatch()
 
   return (
-    <div className="flex pa1 justify-between nowrap orange">
-      <div className="flex flex-fixed black">
+    <div className="wrapper">
+      <div className="logout">
         {authToken && <Button
           fullWidth
           variant="contained"
-          color="primary"
+          color="secondary"
           onClick={() => {
             console.log(`Logout clicked`)
             dispatch(logout())

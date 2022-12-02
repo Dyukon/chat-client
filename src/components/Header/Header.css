@@ -1,0 +1,10 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: auto 100px;
+  grid-template-areas:
+    ". logout";
+}
+
+.logout {
+  grid-area: logout;
+}

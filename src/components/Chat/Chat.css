@@ -1,0 +1,18 @@
+.wrapper {
+  display: grid;
+  grid-template-rows: 100px auto 100px;
+  grid-template-areas:
+    "header display sender";
+}
+
+.header {
+  grid-area: header;
+}
+
+.display {
+  grid-area: display;
+}
+
+.sender {
+  grid-area: sender;
+}

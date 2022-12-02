@@ -9,8 +9,9 @@ import { useMutation } from '@apollo/client'
 import { LoginUserDocument, SignupUserDocument } from '../../gql/graphql'
 import { login } from '../../features/auth/authSlice'
 import { useAppDispatch } from '../../hooks'
+import LoginProps from './Login.props'
 
-function Login() {
+const Login = (props: LoginProps): JSX.Element => {
   const dispatch = useAppDispatch()
 
   const [formState, setFormState] = useState({

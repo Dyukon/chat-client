@@ -1,14 +1,10 @@
-import {
-  Container,
-  Typography,
-  TextField,
-  Button,
-} from '@mui/material'
+import { Container, TextField, Button } from '@mui/material'
 import { useState } from 'react'
-import { SendMessageDocument } from '../../gql/graphql'
+import { SendMessageDocument } from '../../../gql/graphql'
 import { useMutation } from '@apollo/client'
+import MessageSenderProps from './MessageSender.props'
 
-function Chat() {
+const MessageSender = (props: MessageSenderProps): JSX.Element => {
 
   const [formState, setFormState] = useState({
     message: '',
@@ -36,10 +32,6 @@ function Chat() {
 
   return (
     <Container maxWidth="xs">
-      <Typography variant="h3">
-        Chat
-      </Typography>
-
       <form>
         <TextField
           variant="outlined"
@@ -71,4 +63,4 @@ function Chat() {
   )
 }
 
-export default Chat
+export default MessageSender

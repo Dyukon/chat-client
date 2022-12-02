@@ -1,8 +1,8 @@
 import React from 'react'
 import './App.css'
-import Login from './components/Login/login'
-import Chat from './components/Chat/chat'
-import Header from './components/Header/header'
+import Login from './components/Login/Login'
+import Chat from './components/Chat/Chat'
+import Header from './components/Header/Header'
 import { useAppSelector } from './hooks'
 
 function App() {
