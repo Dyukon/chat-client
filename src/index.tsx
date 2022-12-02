@@ -2,13 +2,26 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
-import { ApolloClient, ApolloProvider, gql, InMemoryCache } from '@apollo/client'
-import { BrowserRouter, Router } from 'react-router-dom'
+import { ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache } from '@apollo/client'
 import { Provider } from 'react-redux'
 import { store } from './store'
 
+const authLink = new ApolloLink((operation, forward) => {
+  const token = store.getState().auth.token
+  operation.setContext({
+    headers: {
+      authorization: token ? `Bearer ${token}` : ''
+    }
+  })
+  return forward(operation)
+})
+
+const httpLink = new HttpLink({
+  uri: 'http://localhost:3000/graphql'
+})
+
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache()
 })
 
@@ -19,9 +32,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <App/>
-      </BrowserRouter>
+      <App/>
     </ApolloProvider>
   </Provider>
 )

@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
+import { AUTH_TOKEN } from '../../constants'
 
 interface AuthState {
   token: string
 }
 
 const initialState: AuthState = {
-  token: ''
+  token: localStorage.getItem(AUTH_TOKEN) || ''
 }
 
 export const authSlice = createSlice({
@@ -14,12 +15,15 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action: PayloadAction<string>) => {
-      state.token = action.payload
-      console.log(`login action - state: ${JSON.stringify(state)}`)
+      const token = action.payload
+      state.token = token
+      localStorage.setItem(AUTH_TOKEN, token)
+      console.log(`login action - token: ${token}`)
     },
     logout: (state) => {
       state.token = ''
-      console.log(`logout action - state: ${JSON.stringify(state)}`)
+      localStorage.removeItem(AUTH_TOKEN)
+      console.log(`logout action`)
     },
     testAction: (state) => {
       console.log(`test action - state: ${JSON.stringify(state)}`)

@@ -1,0 +1,8 @@
+mutation SendMessage($text: String!) {
+  createMessage(params: {
+    text: $text
+  }) {
+    id
+    text
+  }
+}

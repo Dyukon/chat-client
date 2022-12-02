@@ -33,7 +33,6 @@ function Login() {
       dispatch(login(accessToken))
     },
     onError: (error => {
-      alert(error.message)
       setFormState({
         ...formState,
         error: `${error}`
@@ -123,7 +122,7 @@ function Login() {
             })
           }}
         >
-          {formState.login ? 'need to create an account?' : 'already have an account?'}
+          {formState.login ? 'create a new account' : 'login with existing account'}
         </Button>
 
         {formState.error && <div>
