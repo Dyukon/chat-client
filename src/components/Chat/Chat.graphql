@@ -22,3 +22,13 @@ mutation SendMessage($text: String!) {
     text
   }
 }
+
+subscription OnMessageAdded {
+  messageAdded {
+    id
+    text
+    createdAt
+    senderId
+    senderName
+  }
+}

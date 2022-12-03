@@ -51,6 +51,7 @@ const MessageSender = (props: MessageSenderProps): JSX.Element => {
           fullWidth
           variant="contained"
           color="primary"
+          disabled={formState.message.length===0}
           onClick={() => doSendMessage()}
         >
           Send message
