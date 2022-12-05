@@ -18,12 +18,14 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation)
 })
 
+console.log(`process.env: ${JSON.stringify(process.env)}`)
+
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3000/graphql'
+  uri: process.env.REACT_APP_SERVER_GRAPHQL_URL || 'http://localhost:3000/graphql'
 })
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:3000/graphql',
+  uri: process.env.REACT_APP_SERVER_GRAPHQL_WEBSOCKET_URL || 'ws://localhost:3000/graphql',
   options: {
     reconnect: true
   }
