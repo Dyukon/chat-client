@@ -1,10 +1,18 @@
 import ChatMessageProps from './ChatMessage.props'
 import './ChatMessage.css'
 import dateformat from 'dateformat'
+import cn from 'classnames'
+import { selectUserId } from '../../../features/auth/auth.slice'
+import { useAppSelector } from '../../../hooks'
 
 const ChatMessage = (props: ChatMessageProps): JSX.Element => {
+  const myId = useAppSelector(selectUserId)
   return (
-    <div className='message_wrapper'>
+    <div className={cn(
+      'message_wrapper',
+        props.message.senderId === myId ? 'message_my' : 'message_alien'
+      )}
+    >
       <div className='message_top'>
         <div className='message_sender'>
           {props.message.senderName}
