@@ -1,24 +1,28 @@
 .chat_wrapper {
-  display: grid;
-  grid-auto-flow: column;
-  justify-items: center;
-  grid-template-rows: 100px 300px 200px;
-  grid-template-areas:
-    "header"
-    "display"
-    "sender";
+  position: relative;
 }
 
 .chat_header {
-  grid-area: header;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 800px;
 }
 
 .chat_display {
-  grid-area: display;
-  overflow-y: scroll;
-  /*max-height: calc(100% - 300px);*/
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 80px;
+  bottom: 150px;
+  overflow-y: auto;
 }
 
 .chat_sender {
-  grid-area: sender;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 150px;
+  bottom: 0;
 }

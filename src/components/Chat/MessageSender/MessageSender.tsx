@@ -4,6 +4,7 @@ import { SendMessageDocument } from '../../../gql/graphql'
 import { useMutation } from '@apollo/client'
 import MessageSenderProps from './MessageSender.props'
 import './MessageSender.css'
+import cn from 'classnames'
 
 const MessageSender = (props: MessageSenderProps): JSX.Element => {
 
@@ -32,7 +33,10 @@ const MessageSender = (props: MessageSenderProps): JSX.Element => {
   })
 
   return (
-    <Container className='sender_wrapper' maxWidth="xs">
+    <Container
+      className={cn('sender_wrapper', props.className)}
+      maxWidth="xs"
+    >
       <TextField
         variant="outlined"
         margin="normal"
