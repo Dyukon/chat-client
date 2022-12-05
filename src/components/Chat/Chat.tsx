@@ -5,22 +5,17 @@ import './Chat.css'
 import ChatProps from './Chat.props'
 import cn from 'classnames'
 import { useQuery } from '@apollo/client'
-import { GetCurrentUserInfoDocument, OnMessageAddedDocument } from '../../gql/graphql'
-import { gotInfo } from '../../features/authSlice'
+import { GetMessagesDocument, OnMessageAddedDocument } from '../../gql/graphql'
+import { gotInfo } from '../../features/auth/auth.slice'
 import { useAppDispatch } from '../../hooks'
-import { setMessages } from '../../features/chatSlice'
+import { setMessages } from '../../features/chat/chat.slice'
 import { useCallback, useEffect } from 'react'
 
 const Chat = (props: ChatProps): JSX.Element => {
   const dispatch = useAppDispatch()
 
-  const { subscribeToMore, loading, error } = useQuery(GetCurrentUserInfoDocument, {
-    onCompleted: ({ currentUser, messages }) => {
-      console.log(`currentUserInfo completed - currentUser: ${JSON.stringify(currentUser)}, messages: ${JSON.stringify(messages)}`)
-      dispatch(gotInfo({
-        userId: currentUser.id,
-        userName: currentUser.name
-      }))
+  const { subscribeToMore, loading, error } = useQuery(GetMessagesDocument, {
+    onCompleted: ({ messages }) => {
       dispatch(setMessages(messages))
     },
   })
@@ -29,10 +24,12 @@ const Chat = (props: ChatProps): JSX.Element => {
     subscribeToMore({
       document: OnMessageAddedDocument,
       updateQuery: (prev, { subscriptionData }) => {
+        console.log(`updateQuery`)
         if (!subscriptionData) {
           return prev
         }
         const newItem = subscriptionData.data.messageAdded
+        console.log(`newItem: ${JSON.stringify(newItem)}`)
         return Object.assign({}, prev, {
           messages: [...prev.messages, newItem]
         })

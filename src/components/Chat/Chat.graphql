@@ -1,8 +1,4 @@
-query GetCurrentUserInfo {
-  currentUser {
-    id
-    name
-  }
+query GetMessages {
   messages(params: {
 
   }) {

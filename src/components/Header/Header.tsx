@@ -1,5 +1,5 @@
 import React from 'react'
-import { logout, selectAuthToken, selectUserName } from '../../features/authSlice'
+import { logout, selectAuthToken, selectUserName } from '../../features/auth/auth.slice'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { Button } from '@mui/material'
 import './Header.css'

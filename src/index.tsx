@@ -9,7 +9,7 @@ import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 
 const authLink = new ApolloLink((operation, forward) => {
-  const token = store.getState().auth.token
+  const token = store.getState().auth.accessToken
   operation.setContext({
     headers: {
       authorization: token ? `Bearer ${token}` : ''

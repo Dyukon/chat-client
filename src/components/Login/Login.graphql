@@ -11,6 +11,11 @@ mutation signupUser(
     }
   ) {
     accessToken
+    user {
+      id
+      email
+      name
+    }
   }
 }
 
@@ -25,5 +30,10 @@ mutation loginUser(
     }
   ) {
     accessToken
+    user {
+      id
+      email
+      name
+    }
   }
 }

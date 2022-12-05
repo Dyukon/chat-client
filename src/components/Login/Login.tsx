@@ -7,7 +7,7 @@ import {
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { LoginUserDocument, SignupUserDocument } from '../../gql/graphql'
-import { login } from '../../features/authSlice'
+import { login } from '../../features/auth/auth.slice'
 import { useAppDispatch } from '../../hooks'
 import LoginProps from './Login.props'
 import './Login.css'
@@ -31,8 +31,13 @@ const Login = (props: LoginProps): JSX.Element => {
     },
     onCompleted: ({ createUser }) => {
       const accessToken = createUser.accessToken
-      console.log(`createUser completed - accessToken: ${JSON.stringify(accessToken)}`)
-      dispatch(login(accessToken))
+      const user = createUser.user
+      console.log(`createUser completed - accessToken: ${accessToken}, user: ${JSON.stringify(user)}`)
+      dispatch(login({
+        accessToken,
+        userId: user.id,
+        userName: user.name
+      }))
     },
     onError: (error => {
       setFormState({
@@ -49,8 +54,13 @@ const Login = (props: LoginProps): JSX.Element => {
     },
     onCompleted: ({ loginUser }) => {
       const accessToken = loginUser.accessToken
-      console.log(`loginUser completed - accessToken: ${JSON.stringify(accessToken)}`)
-      dispatch(login(accessToken))
+      const user = loginUser.user
+      console.log(`loginUser completed - accessToken: ${accessToken}, user: ${JSON.stringify(user)}`)
+      dispatch(login({
+        accessToken: accessToken,
+        userId: user.id,
+        userName: user.name
+      }))
     },
     onError: (error => {
       setFormState({

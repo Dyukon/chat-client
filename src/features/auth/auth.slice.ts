@@ -1,30 +1,38 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { RootState } from '../store'
-import { AUTH_TOKEN } from '../constants'
+import { RootState } from '../../store'
+import { AUTH_TOKEN, USER_ID, USER_NAME } from '../../constants'
+import { LoginPayload } from './actions/login.payload'
 
 interface AuthState {
-  token: string,
+  accessToken: string,
   userId: string,
   userName: string
 }
 
 const initialState: AuthState = {
-  token: localStorage.getItem(AUTH_TOKEN) || '',
-  userId: '',
-  userName: ''
+  accessToken: localStorage.getItem(AUTH_TOKEN) || '',
+  userId: localStorage.getItem(USER_ID) || '',
+  userName: localStorage.getItem(USER_NAME) || ''
 }
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<string>) => {
-      const token = action.payload
-      localStorage.setItem(AUTH_TOKEN, token)
-      console.log(`login action - token: ${token}`)
+    login: (state, action: PayloadAction<LoginPayload>) => {
+      const accessToken = action.payload.accessToken
+      const userId = action.payload.userId
+      const userName = action.payload.userName
+
+      localStorage.setItem(AUTH_TOKEN, accessToken)
+      localStorage.setItem(USER_ID, userId)
+      localStorage.setItem(USER_NAME, userName)
+      console.log(`login action - payload: ${JSON.stringify(action.payload)}`)
       return {
         ...state,
-        token: token
+        accessToken,
+        userId,
+        userName
       }
     },
     logout: (state) => {
@@ -32,7 +40,7 @@ export const authSlice = createSlice({
       console.log(`logout action`)
       return {
         ...state,
-        token: '',
+        accessToken: '',
         userId: '',
         userName: ''
       }
@@ -54,7 +62,7 @@ export const authSlice = createSlice({
 
 export const { login, logout, gotInfo } = authSlice.actions
 
-export const selectAuthToken = (state: RootState) => state.auth.token
+export const selectAuthToken = (state: RootState) => state.auth.accessToken
 export const selectUserName = (state: RootState) => state.auth.userName
 
 export default authSlice.reducer

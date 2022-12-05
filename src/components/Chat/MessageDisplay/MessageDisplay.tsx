@@ -3,7 +3,7 @@ import MessageDisplayProps from './MesageDisplay.props'
 import './MessageDisplay.css'
 import cn from 'classnames'
 import { useAppSelector } from '../../../hooks'
-import { selectMessages } from '../../../features/chatSlice'
+import { selectMessages } from '../../../features/chat/chat.slice'
 import ChatMessage from '../ChatMessage/ChatMessage'
 
 const MessageDisplay = (props: MessageDisplayProps): JSX.Element => {
@@ -14,6 +14,10 @@ const MessageDisplay = (props: MessageDisplayProps): JSX.Element => {
   useEffect(() => {
     bottomRef.current?.scrollIntoView()
   }, [])
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView()
+  }, [messages])
 
   return (
     <div className={cn('display_wrapper', props.className)}>

@@ -33,34 +33,38 @@ const MessageSender = (props: MessageSenderProps): JSX.Element => {
 
   return (
     <Container className='sender_wrapper' maxWidth="xs">
-      <form>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          label="Input message"
-          fullWidth
-          required
-          value={formState.message}
-          onChange = {(e) => setFormState({
-            ...formState,
-            message: e.target.value
-          })}
-        />
+      <TextField
+        variant="outlined"
+        margin="normal"
+        label="Input message"
+        fullWidth
+        required
+        value={formState.message}
+        onChange = {(event) => setFormState({
+          ...formState,
+          message: event.target.value
+        })}
+        onKeyPress = {(event) => {
+          if (event.key === 'Enter' && formState.message.length>0) {
+            doSendMessage()
+            event.stopPropagation()
+          }
+        }}
+      />
 
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          disabled={formState.message.length===0}
-          onClick={() => doSendMessage()}
-        >
-          Send message
-        </Button>
+      <Button
+        fullWidth
+        variant="contained"
+        color="primary"
+        disabled={formState.message.length===0}
+        onClick={() => doSendMessage()}
+      >
+        Send message
+      </Button>
 
-        {formState.error && <div>
-          {formState.error}
-        </div>}
-      </form>
+      {formState.error && <div>
+        {formState.error}
+      </div>}
     </Container>
   )
 }
