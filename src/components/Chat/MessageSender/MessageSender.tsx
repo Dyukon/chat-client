@@ -55,15 +55,17 @@ const MessageSender = (props: MessageSenderProps): JSX.Element => {
         />
       </Form.Item>
 
-      <Button
-        color="primary"
-        disabled={formState.message.length===0}
-        onClick={() => doSendMessage()}
-      >
-        Send message
-      </Button>
+      <div className='sender_buttons'>
+        <Button
+          color="primary"
+          disabled={formState.message.length===0}
+          onClick={() => doSendMessage()}
+        >
+          Send message
+        </Button>
+      </div>
 
-      {formState.error && <div>
+      {formState.error && <div className='sender_error'>
         {formState.error}
       </div>}
     </div>

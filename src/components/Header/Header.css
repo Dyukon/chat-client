@@ -5,6 +5,7 @@
   grid-template-areas:
     ". username logout";
   align-items: center;
+  padding: 10px;
 }
 
 .header_username {

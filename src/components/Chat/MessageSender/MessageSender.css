@@ -1,3 +1,14 @@
 .sender_wrapper {
   padding-bottom: 20px;
+  font-size: 16px;
+}
+
+.sender_buttons {
+  text-align: center;
+}
+
+.sender_error {
+  color: #ff0000;
+  text-align: center;
+  margin-top: 10px;
 }

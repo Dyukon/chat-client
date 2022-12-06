@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useMutation } from '@apollo/client'
+import { ApolloError, useMutation } from '@apollo/client'
 import { LoginUserDocument, SignupUserDocument } from '../../gql/graphql'
 import { login } from '../../features/auth/auth.slice'
 import { useAppDispatch } from '../../hooks'
@@ -37,7 +37,7 @@ const Login = (props: LoginProps): JSX.Element => {
     onError: (error => {
       setFormState({
         ...formState,
-        error: `${error}`
+        error: extractErrorMessage(error)
       })
     })
   })
@@ -60,7 +60,7 @@ const Login = (props: LoginProps): JSX.Element => {
     onError: (error => {
       setFormState({
         ...formState,
-        error: `${error}`
+        error: extractErrorMessage(error)
       })
     })
   })
@@ -71,7 +71,10 @@ const Login = (props: LoginProps): JSX.Element => {
         {formState.login ? 'Login' : 'Sign Up'}
       </div>
 
-      <form>
+      <Form
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 8 }}
+      >
         {!formState.login && <Form.Item
           label='Name'
         >
@@ -109,31 +112,38 @@ const Login = (props: LoginProps): JSX.Element => {
           />
         </Form.Item>
 
-        <Button
-          color="primary"
-          onClick={() => formState.login ? doLogin() : doSignup()}
-        >
-          {formState.login ? 'login' : 'create account'}
-        </Button>
+        <div className='login_buttons'>
+          <Button
+            className='login_button'
+            type="primary"
+            onClick={() => formState.login ? doLogin() : doSignup()}
+          >
+            {formState.login ? 'Login' : 'Create account'}
+          </Button>
 
-        <Button
-          color="secondary"
-          onClick={() => {
-            setFormState({
-              ...formState,
-              login: !formState.login
-            })
-          }}
-        >
-          {formState.login ? 'create a new account' : 'login with existing account'}
-        </Button>
+          <Button
+            type="ghost"
+            onClick={() => {
+              setFormState({
+                ...formState,
+                login: !formState.login
+              })
+            }}
+          >
+            {formState.login ? 'Create a new account' : 'Login with existing account'}
+          </Button>
+        </div>
 
-        {formState.error && <div>
+        {formState.error && <div className='login_error'>
           {formState.error}
         </div>}
-      </form>
+      </Form>
     </div>
   )
+}
+
+function extractErrorMessage(error: ApolloError) {
+  return error.graphQLErrors[0].extensions?.response?.message[0] ?? error.message
 }
 
 export default Login

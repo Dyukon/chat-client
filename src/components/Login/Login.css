@@ -1,3 +1,19 @@
 .login_header {
   text-align: center;
+  font-size: 24px;
+  margin: 20px;
+}
+
+.login_buttons {
+  text-align: center;
+}
+
+.login_button {
+  margin-right: 10px;
+}
+
+.login_error {
+  color: #ff0000;
+  text-align: center;
+  margin-top: 20px;
 }
