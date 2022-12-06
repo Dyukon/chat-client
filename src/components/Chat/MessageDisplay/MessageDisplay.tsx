@@ -9,7 +9,7 @@ import {
   useOnMessageAddedSubscription
 } from '../../../generated/schema'
 
-const MessageDisplay = (props: MessageDisplayProps): JSX.Element => {
+const MessageDisplay: React.FC<MessageDisplayProps> = (props) => {
   const [messages, setMessages] = useState<Message[]>([])
 
   const bottomRef = useRef<null | HTMLDivElement>(null)

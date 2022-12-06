@@ -4,8 +4,9 @@ import ChatHeader from './ChatHeader/ChatHeader'
 import './Chat.css'
 import ChatProps from './Chat.props'
 import cn from 'classnames'
+import React from 'react'
 
-const Chat = (props: ChatProps): JSX.Element => {
+const Chat: React.FC<ChatProps> = (props) => {
   return (
     <div className={cn('chat_wrapper', props.className)}>
       <ChatHeader className='chat_header'/>

@@ -4,8 +4,9 @@ import dateformat from 'dateformat'
 import cn from 'classnames'
 import { selectUserId } from '../../../features/auth/auth.slice'
 import { useAppSelector } from '../../../hooks'
+import React from 'react'
 
-const ChatMessage = (props: ChatMessageProps): JSX.Element => {
+const ChatMessage: React.FC<ChatMessageProps> = (props) => {
   const myId = useAppSelector(selectUserId)
   return (
     <div className={cn(

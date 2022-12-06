@@ -2,7 +2,7 @@ import React from 'react'
 import ChatHeaderProps from './ChatHeader.props'
 import './ChatHeader.css'
 
-const ChatHeader = (props: ChatHeaderProps): JSX.Element => {
+const ChatHeader: React.FC<ChatHeaderProps> = (props) => {
   return (
     <>
       <div

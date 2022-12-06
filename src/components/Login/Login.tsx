@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { ApolloError } from '@apollo/client'
 import {
   useLoginUserMutation,
@@ -10,7 +10,7 @@ import LoginProps from './Login.props'
 import './Login.css'
 import { Input, Form, Button } from 'antd'
 
-const Login = (props: LoginProps): JSX.Element => {
+const Login: React.FC<LoginProps> = (props) => {
   const dispatch = useAppDispatch()
 
   const [formState, setFormState] = useState({

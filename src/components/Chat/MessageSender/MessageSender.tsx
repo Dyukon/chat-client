@@ -1,11 +1,11 @@
 import { Input, Button, Form } from 'antd'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useSendMessageMutation } from '../../../generated/schema'
 import MessageSenderProps from './MessageSender.props'
 import './MessageSender.css'
 import cn from 'classnames'
 
-const MessageSender = (props: MessageSenderProps): JSX.Element => {
+const MessageSender: React.FC<MessageSenderProps> = (props) => {
 
   const [formState, setFormState] = useState({
     message: '',
