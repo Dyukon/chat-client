@@ -15,8 +15,8 @@ function App() {
   return (
     <div className='app_wrapper'>
       <Header className='app_header'/>
-      {token && <Chat className='app_body'/>}
-      {!token && <Login className='app_body'/>}
+        {token && <Chat className='app_body'/>}
+        {!token && <Login className='app_body'/>}
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import { Input, Button, Form } from 'antd'
 import { useState } from 'react'
-import { SendMessageDocument, useSendMessageMutation } from '../../../generated/schema'
-import { useMutation } from '@apollo/client'
+import { useSendMessageMutation } from '../../../generated/schema'
 import MessageSenderProps from './MessageSender.props'
 import './MessageSender.css'
 import cn from 'classnames'
