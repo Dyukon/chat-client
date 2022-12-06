@@ -1,7 +1,7 @@
 import React from 'react'
 import { logout, selectAuthToken, selectUserName } from '../../features/auth/auth.slice'
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import { Button } from '@mui/material'
+import { Button } from 'antd'
 import './Header.css'
 import HeaderProps from './Header.props'
 import cn from 'classnames'
@@ -20,8 +20,6 @@ const Header = (props: HeaderProps): JSX.Element => {
 
       <div className="header_logout">
         {authToken && <Button
-          fullWidth
-          variant="contained"
           color="secondary"
           onClick={() => {
             console.log(`Logout clicked`)

@@ -1,9 +1,3 @@
-import {
-  Container,
-  Typography,
-  TextField,
-  Button,
-} from '@mui/material'
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { LoginUserDocument, SignupUserDocument } from '../../gql/graphql'
@@ -11,6 +5,7 @@ import { login } from '../../features/auth/auth.slice'
 import { useAppDispatch } from '../../hooks'
 import LoginProps from './Login.props'
 import './Login.css'
+import { Input, Form, Button } from 'antd'
 
 const Login = (props: LoginProps): JSX.Element => {
   const dispatch = useAppDispatch()
@@ -71,52 +66,50 @@ const Login = (props: LoginProps): JSX.Element => {
   })
 
   return (
-    <Container className={props.className}>
-      <Typography className='login_header' variant="h3">
+    <div className={props.className}>
+      <div className='login_header'>
         {formState.login ? 'Login' : 'Sign Up'}
-      </Typography>
+      </div>
 
       <form>
-        {!formState.login && <TextField
-          variant="outlined"
-          margin="normal"
-          label="Name"
-          fullWidth
-          required
-          onChange = {(e) => setFormState({
-            ...formState,
-            name: e.target.value
-          })}
-        />}
+        {!formState.login && <Form.Item
+          label='Name'
+        >
+          <Input
+            required
+            onChange = {(e) => setFormState({
+              ...formState,
+              name: e.target.value
+            })}
+          />
+        </Form.Item>}
 
-        <TextField
-          variant="outlined"
-          margin="normal"
-          label="Email"
-          fullWidth
-          required
-          onChange = {(e) => setFormState({
-            ...formState,
-            email: e.target.value
-          })}
-        />
+        <Form.Item
+          label='Email'
+        >
+          <Input
+            required
+            onChange = {(e) => setFormState({
+              ...formState,
+              email: e.target.value
+            })}
+          />
+        </Form.Item>
 
-        <TextField
-          variant="outlined"
-          margin="normal"
+        <Form.Item
           label="Password"
-          type="password"
-          fullWidth
-          required
-          onChange = {(e) => setFormState({
-            ...formState,
-            password: e.target.value
-          })}
-        />
+        >
+          <Input
+            type="password"
+            required
+            onChange = {(e) => setFormState({
+              ...formState,
+              password: e.target.value
+            })}
+          />
+        </Form.Item>
 
         <Button
-          fullWidth
-          variant="contained"
           color="primary"
           onClick={() => formState.login ? doLogin() : doSignup()}
         >
@@ -124,8 +117,6 @@ const Login = (props: LoginProps): JSX.Element => {
         </Button>
 
         <Button
-          fullWidth
-          variant="contained"
           color="secondary"
           onClick={() => {
             setFormState({
@@ -141,7 +132,7 @@ const Login = (props: LoginProps): JSX.Element => {
           {formState.error}
         </div>}
       </form>
-    </Container>
+    </div>
   )
 }
 

@@ -1,4 +1,4 @@
-import { Container, TextField, Button } from '@mui/material'
+import { Input, Button, Form } from 'antd'
 import { useState } from 'react'
 import { SendMessageDocument } from '../../../gql/graphql'
 import { useMutation } from '@apollo/client'
@@ -33,32 +33,29 @@ const MessageSender = (props: MessageSenderProps): JSX.Element => {
   })
 
   return (
-    <Container
+    <div
       className={cn('sender_wrapper', props.className)}
-      maxWidth="xs"
     >
-      <TextField
-        variant="outlined"
-        margin="normal"
+      <Form.Item
         label="Input message"
-        fullWidth
-        required
-        value={formState.message}
-        onChange = {(event) => setFormState({
-          ...formState,
-          message: event.target.value
-        })}
-        onKeyPress = {(event) => {
-          if (event.key === 'Enter' && formState.message.length>0) {
-            doSendMessage()
-            event.stopPropagation()
-          }
-        }}
-      />
+      >
+        <Input
+          required
+          value={formState.message}
+          onChange = {(event) => setFormState({
+            ...formState,
+            message: event.target.value
+          })}
+          onKeyPress = {(event) => {
+            if (event.key === 'Enter' && formState.message.length>0) {
+              doSendMessage()
+              event.stopPropagation()
+            }
+          }}
+        />
+      </Form.Item>
 
       <Button
-        fullWidth
-        variant="contained"
         color="primary"
         disabled={formState.message.length===0}
         onClick={() => doSendMessage()}
@@ -69,7 +66,7 @@ const MessageSender = (props: MessageSenderProps): JSX.Element => {
       {formState.error && <div>
         {formState.error}
       </div>}
-    </Container>
+    </div>
   )
 }
 
