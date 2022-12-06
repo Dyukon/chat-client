@@ -27,6 +27,7 @@ export const authSlice = createSlice({
       localStorage.setItem(AUTH_TOKEN, accessToken)
       localStorage.setItem(USER_ID, userId)
       localStorage.setItem(USER_NAME, userName)
+
       console.log(`login action - payload: ${JSON.stringify(action.payload)}`)
       return {
         ...state,
@@ -37,6 +38,9 @@ export const authSlice = createSlice({
     },
     logout: (state) => {
       localStorage.removeItem(AUTH_TOKEN)
+      localStorage.removeItem(USER_ID)
+      localStorage.removeItem(USER_NAME)
+
       console.log(`logout action`)
       return {
         ...state,
