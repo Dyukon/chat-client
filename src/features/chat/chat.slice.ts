@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
-import { Message } from '../../gql/graphql'
+import { Message } from '../../generated/schema'
 
 interface ChatState {
   messages: Message[]

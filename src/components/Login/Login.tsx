@@ -1,6 +1,9 @@
 import { useState } from 'react'
-import { ApolloError, useMutation } from '@apollo/client'
-import { LoginUserDocument, SignupUserDocument } from '../../gql/graphql'
+import { ApolloError } from '@apollo/client'
+import {
+  useLoginUserMutation,
+  useSignupUserMutation
+} from '../../generated/schema'
 import { login } from '../../features/auth/auth.slice'
 import { useAppDispatch } from '../../hooks'
 import LoginProps from './Login.props'
@@ -18,7 +21,7 @@ const Login = (props: LoginProps): JSX.Element => {
     error: ''
   })
 
-  const [doSignup] = useMutation(SignupUserDocument, {
+  const [doSignup] = useSignupUserMutation({
     variables: {
       name: formState.name,
       email: formState.email,
@@ -42,7 +45,7 @@ const Login = (props: LoginProps): JSX.Element => {
     })
   })
 
-  const [doLogin] = useMutation(LoginUserDocument, {
+  const [doLogin] = useLoginUserMutation({
     variables: {
       email: formState.email,
       password: formState.password

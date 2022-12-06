@@ -1,6 +1,6 @@
 import { Input, Button, Form } from 'antd'
 import { useState } from 'react'
-import { SendMessageDocument } from '../../../gql/graphql'
+import { SendMessageDocument, useSendMessageMutation } from '../../../generated/schema'
 import { useMutation } from '@apollo/client'
 import MessageSenderProps from './MessageSender.props'
 import './MessageSender.css'
@@ -13,7 +13,7 @@ const MessageSender = (props: MessageSenderProps): JSX.Element => {
     error: ''
   })
 
-  const [doSendMessage] = useMutation(SendMessageDocument, {
+  const [doSendMessage] = useSendMessageMutation({
     variables: {
       text: formState.message
     },

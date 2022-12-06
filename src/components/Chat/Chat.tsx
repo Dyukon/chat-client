@@ -5,7 +5,7 @@ import './Chat.css'
 import ChatProps from './Chat.props'
 import cn from 'classnames'
 import { useQuery } from '@apollo/client'
-import { GetMessagesDocument, OnMessageAddedDocument } from '../../gql/graphql'
+import { GetMessagesDocument, OnMessageAddedDocument, useGetMessagesQuery } from '../../generated/schema'
 import { useAppDispatch } from '../../hooks'
 import { setMessages } from '../../features/chat/chat.slice'
 import { useCallback, useEffect } from 'react'
@@ -13,7 +13,7 @@ import { useCallback, useEffect } from 'react'
 const Chat = (props: ChatProps): JSX.Element => {
   const dispatch = useAppDispatch()
 
-  const { subscribeToMore, loading, error } = useQuery(GetMessagesDocument, {
+  const { subscribeToMore, loading, error } = useGetMessagesQuery({
     onCompleted: ({ messages }) => {
       dispatch(setMessages(messages))
     },
@@ -22,7 +22,7 @@ const Chat = (props: ChatProps): JSX.Element => {
   const subscribeToNewMessages = useCallback(() => {
     subscribeToMore({
       document: OnMessageAddedDocument,
-      updateQuery: (prev, { subscriptionData }) => {
+      updateQuery: (prev, { subscriptionData }: any) => {
         console.log(`updateQuery`)
         if (!subscriptionData) {
           return prev

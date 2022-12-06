@@ -1,4 +1,4 @@
-import { Message } from '../../../gql/graphql'
+import { Message } from '../../../generated/schema'
 
 export default interface ChatMessageProps {
   message: Message
