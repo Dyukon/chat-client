@@ -4,9 +4,10 @@ import './index.css'
 import App from './App'
 import { ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache, split } from '@apollo/client'
 import { Provider } from 'react-redux'
-import { store } from './store'
+import { persistor, store } from './store'
 import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const authLink = new ApolloLink((operation, forward) => {
   const token = store.getState().auth.accessToken
@@ -55,7 +56,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <Provider store={store}>
     <ApolloProvider client={client}>
-      <App/>
+      <PersistGate persistor={persistor}>
+        <App/>
+      </PersistGate>
     </ApolloProvider>
   </Provider>
 )

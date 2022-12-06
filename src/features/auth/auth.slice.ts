@@ -10,9 +10,9 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  accessToken: localStorage.getItem(AUTH_TOKEN) || '',
-  userId: localStorage.getItem(USER_ID) || '',
-  userName: localStorage.getItem(USER_NAME) || ''
+  accessToken: '',
+  userId: '',
+  userName: ''
 }
 
 export const authSlice = createSlice({
@@ -24,11 +24,8 @@ export const authSlice = createSlice({
       const userId = action.payload.userId
       const userName = action.payload.userName
 
-      localStorage.setItem(AUTH_TOKEN, accessToken)
-      localStorage.setItem(USER_ID, userId)
-      localStorage.setItem(USER_NAME, userName)
-
       console.log(`login action - payload: ${JSON.stringify(action.payload)}`)
+
       return {
         ...state,
         accessToken,
@@ -37,10 +34,6 @@ export const authSlice = createSlice({
       }
     },
     logout: (state) => {
-      localStorage.removeItem(AUTH_TOKEN)
-      localStorage.removeItem(USER_ID)
-      localStorage.removeItem(USER_NAME)
-
       console.log(`logout action`)
       return {
         ...state,
