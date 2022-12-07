@@ -1,0 +1,10 @@
+mutation SendMessage($message: String!) {
+  createEvent(params: {
+    type: MESSAGE,
+    message: $message
+  }) {
+    id
+    type
+    message
+  }
+}

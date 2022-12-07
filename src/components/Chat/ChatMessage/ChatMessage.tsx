@@ -11,19 +11,19 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
   return (
     <div className={cn(
       'message_wrapper',
-        props.message.senderId === myId ? 'message_my' : 'message_alien'
+        props.senderId === myId ? 'message_my' : 'message_alien'
       )}
     >
       <div className='message_top'>
         <div className='message_sender'>
-          {props.message.senderName}
+          {props.senderName}
         </div>
         <div className='message_time'>
-          {formatDate(props.message.createdAt)}
+          {formatDate(props.isoDate)}
         </div>
       </div>
       <div className='message_text'>
-        {props.message.text}
+        {props.message}
       </div>
     </div>
   )

@@ -9,18 +9,20 @@ const MessageSender: React.FC<MessageSenderProps> = (props) => {
 
   const [formState, setFormState] = useState({
     message: '',
+    messageToSend: '',
     error: ''
   })
 
   const [doSendMessage] = useSendMessageMutation({
     variables: {
-      text: formState.message
+      message: formState.messageToSend
     },
-    onCompleted: ({ createMessage }) => {
-      console.log(`createMessage completed - result: ${JSON.stringify(createMessage)}`)
+    onCompleted: ({ createEvent }) => {
+      console.log(`createEvent completed - result: ${JSON.stringify(createEvent)}`)
       setFormState({
         ...formState,
-        message: ''
+        message: '',
+        messageToSend: ''
       })
     },
     onError: (error => {
@@ -41,12 +43,16 @@ const MessageSender: React.FC<MessageSenderProps> = (props) => {
         <Input
           required
           value={formState.message}
-          onChange = {(event) => setFormState({
-            ...formState,
-            message: event.target.value
-          })}
+          onChange = {(event) => {
+            const message = event.target.value
+            setFormState({
+              ...formState,
+              message,
+              messageToSend: message.trim()
+            })
+          }}
           onKeyPress = {(event) => {
-            if (event.key === 'Enter' && formState.message.length>0) {
+            if (event.key === 'Enter' && formState.messageToSend.length>0) {
               doSendMessage()
               event.stopPropagation()
             }
@@ -57,7 +63,7 @@ const MessageSender: React.FC<MessageSenderProps> = (props) => {
       <div className='sender_buttons'>
         <Button
           color="primary"
-          disabled={formState.message.length===0}
+          disabled={formState.messageToSend.length===0}
           onClick={() => doSendMessage()}
         >
           Send message

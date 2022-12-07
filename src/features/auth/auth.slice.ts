@@ -1,15 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../store'
-import { AUTH_TOKEN, USER_ID, USER_NAME } from '../../constants'
 import { LoginPayload } from './actions/login.payload'
 
 interface AuthState {
+  isLoggedIn: boolean,
   accessToken: string,
   userId: string,
   userName: string
 }
 
 const initialState: AuthState = {
+  isLoggedIn: false,
   accessToken: '',
   userId: '',
   userName: ''
@@ -28,6 +29,7 @@ export const authSlice = createSlice({
 
       return {
         ...state,
+        isLoggedIn: true,
         accessToken,
         userId,
         userName
@@ -37,28 +39,25 @@ export const authSlice = createSlice({
       console.log(`logout action`)
       return {
         ...state,
+        isLoggedIn: false
+      }
+    },
+    clearAuthInfo: (state) => {
+      console.log(`clearAuthInfo action`)
+      return {
+        ...state,
+        isLoggedIn: false,
         accessToken: '',
         userId: '',
         userName: ''
-      }
-    },
-    gotInfo: (
-      state,
-      action: PayloadAction<{userId: string, userName: string}>
-    ) => {
-      const info = action.payload
-      console.log(`gotInfo action - info: ${JSON.stringify(info)}`)
-      return {
-        ...state,
-        userId: info.userId,
-        userName: info.userName
       }
     }
   }
 })
 
-export const { login, logout, gotInfo } = authSlice.actions
+export const { login, logout, clearAuthInfo } = authSlice.actions
 
+export const selectAuthIsLoggedIn = (state: RootState) => state.auth.isLoggedIn
 export const selectAuthToken = (state: RootState) => state.auth.accessToken
 export const selectUserId = (state: RootState) => state.auth.userId
 export const selectUserName = (state: RootState) => state.auth.userName

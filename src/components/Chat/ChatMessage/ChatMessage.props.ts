@@ -1,5 +1,6 @@
-import { Message } from '../../../generated/schema'
-
 export default interface ChatMessageProps {
-  message: Message
+  senderId: string
+  senderName: string
+  isoDate: string
+  message: string
 }

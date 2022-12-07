@@ -1,5 +1,5 @@
 import React from 'react'
-import { logout, selectAuthToken, selectUserName } from '../../features/auth/auth.slice'
+import { clearAuthInfo, logout, selectAuthToken, selectUserName } from '../../features/auth/auth.slice'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { Button } from 'antd'
 import './Header.css'
@@ -24,6 +24,9 @@ const Header: React.FC<HeaderProps> = (props) => {
           onClick={() => {
             console.log(`Logout clicked`)
             dispatch(logout())
+            setTimeout(() => {
+              dispatch(clearAuthInfo())
+            }, 1000)
           }}
         >
           Logout

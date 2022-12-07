@@ -1,0 +1,23 @@
+query GetEvents {
+  events(params: {
+    type: MESSAGE
+  }) {
+    id
+    type
+    createdAt
+    senderId
+    senderName
+    message
+  }
+}
+
+subscription OnEventAdded {
+  eventAdded {
+    id
+    type
+    createdAt
+    senderId
+    senderName
+    message
+  }
+}
