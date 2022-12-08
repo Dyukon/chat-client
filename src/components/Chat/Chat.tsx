@@ -1,7 +1,7 @@
 import MessageDisplay from './MessageDisplay/MessageDisplay'
 import MessageSender from './MessageSender/MessageSender'
 import ChatHeader from './ChatHeader/ChatHeader'
-import './Chat.css'
+import styles from './Chat.module.css'
 import ChatProps from './Chat.props'
 import cn from 'classnames'
 import React, { useEffect } from 'react'
@@ -22,10 +22,10 @@ const Chat: React.FC<ChatProps & {className: string}> = (props) => {
   }, [doJoin, doLeave])
 
   return (
-    <div className={cn('chat_wrapper', props.className)}>
-      <ChatHeader className='chat_header'/>
-      <MessageDisplay className='chat_display'/>
-      <MessageSender className='chat_sender'/>
+    <div className={cn(styles.wrapper, props.className)}>
+      <ChatHeader className={styles.header}/>
+      <MessageDisplay className={styles.display}/>
+      <MessageSender className={styles.sender}/>
     </div>
   )
 }

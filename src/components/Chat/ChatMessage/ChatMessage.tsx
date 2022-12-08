@@ -1,5 +1,5 @@
 import ChatMessageProps from './ChatMessage.props'
-import './ChatMessage.css'
+import styles from './ChatMessage.module.css'
 import dateformat from 'dateformat'
 import cn from 'classnames'
 import { selectUserId } from '../../../features/auth/auth.slice'
@@ -10,19 +10,19 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
   const myId = useAppSelector(selectUserId)
   return (
     <div className={cn(
-      'message_wrapper',
-        props.senderId === myId ? 'message_my' : 'message_alien'
+        styles.wrapper,
+        props.senderId === myId ? styles.my : styles.alien
       )}
     >
-      <div className='message_top'>
-        <div className='message_sender'>
+      <div className={styles.top}>
+        <div className={styles.sender}>
           {props.senderName}
         </div>
-        <div className='message_time'>
+        <div className={styles.time}>
           {formatDate(props.isoDate)}
         </div>
       </div>
-      <div className='message_text'>
+      <div className={styles.text}>
         {props.message}
       </div>
     </div>

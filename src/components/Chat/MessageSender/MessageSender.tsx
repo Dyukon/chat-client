@@ -2,7 +2,7 @@ import { Input, Button, Form } from 'antd'
 import React, { useState } from 'react'
 import { useSendMessageMutation } from '../../../generated/schema'
 import MessageSenderProps from './MessageSender.props'
-import './MessageSender.css'
+import styles from './MessageSender.module.css'
 import cn from 'classnames'
 
 const MessageSender: React.FC<MessageSenderProps & {className: string}> = (props) => {
@@ -35,7 +35,7 @@ const MessageSender: React.FC<MessageSenderProps & {className: string}> = (props
 
   return (
     <div
-      className={cn('sender_wrapper', props.className)}
+      className={cn(styles.wrapper, props.className)}
     >
       <Form.Item
         label="Input message"
@@ -60,7 +60,7 @@ const MessageSender: React.FC<MessageSenderProps & {className: string}> = (props
         />
       </Form.Item>
 
-      <div className='sender_buttons'>
+      <div className={styles.buttons}>
         <Button
           color="primary"
           disabled={formState.messageToSend.length===0}
@@ -70,7 +70,7 @@ const MessageSender: React.FC<MessageSenderProps & {className: string}> = (props
         </Button>
       </div>
 
-      {formState.error && <div className='sender_error'>
+      {formState.error && <div className={styles.error}>
         {formState.error}
       </div>}
     </div>

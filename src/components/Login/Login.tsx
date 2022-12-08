@@ -7,7 +7,7 @@ import {
 import { login } from '../../features/auth/auth.slice'
 import { useAppDispatch } from '../../hooks'
 import LoginProps from './Login.props'
-import './Login.css'
+import styles from './Login.module.css'
 import { Input, Form, Button } from 'antd'
 
 const Login: React.FC<LoginProps> = (props) => {
@@ -70,7 +70,7 @@ const Login: React.FC<LoginProps> = (props) => {
 
   return (
     <div className={props.className}>
-      <div className='login_header'>
+      <div className={styles.header}>
         {formState.login ? 'Login' : 'Sign Up'}
       </div>
 
@@ -115,9 +115,9 @@ const Login: React.FC<LoginProps> = (props) => {
           />
         </Form.Item>
 
-        <div className='login_buttons'>
+        <div className={styles.buttons}>
           <Button
-            className='login_button'
+            className={styles.button}
             type="primary"
             onClick={() => formState.login ? doLogin() : doSignup()}
           >
@@ -137,7 +137,7 @@ const Login: React.FC<LoginProps> = (props) => {
           </Button>
         </div>
 
-        {formState.error && <div className='login_error'>
+        {formState.error && <div className={styles.error}>
           {formState.error}
         </div>}
       </Form>

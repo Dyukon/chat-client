@@ -1,4 +1,4 @@
-.header_wrapper {
+.wrapper {
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr auto auto;
@@ -8,10 +8,10 @@
   padding: 10px;
 }
 
-.header_username {
+.username {
   grid-area: username;
 }
 
-.header_logout {
+.logout {
   grid-area: logout;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import MessageDisplayProps from './MesageDisplay.props'
-import './MessageDisplay.css'
+import styles from './MessageDisplay.module.css'
 import cn from 'classnames'
 import ChatMessage from '../ChatMessage/ChatMessage'
 import {
@@ -41,7 +41,7 @@ const MessageDisplay: React.FC<MessageDisplayProps & {className: string}> = (pro
   }, [events])
 
   return (
-    <div className={cn('display_wrapper', props.className)}>
+    <div className={cn(styles.wrapper, props.className)}>
       {events.map(event => {
         if (event.type===EventType.Message) {
           return <ChatMessage

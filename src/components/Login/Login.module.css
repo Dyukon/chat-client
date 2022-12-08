@@ -1,18 +1,18 @@
-.login_header {
+.header {
   text-align: center;
   font-size: 24px;
   margin: 20px;
 }
 
-.login_buttons {
+.buttons {
   text-align: center;
 }
 
-.login_button {
+.button {
   margin-right: 10px;
 }
 
-.login_error {
+.error {
   color: #ff0000;
   text-align: center;
   margin-top: 20px;

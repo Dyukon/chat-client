@@ -1,8 +1,8 @@
-.chat_wrapper {
+.wrapper {
   position: relative;
 }
 
-.chat_header {
+.header {
   position: absolute;
   left: 0;
   right: 0;
@@ -10,7 +10,7 @@
   height: 800px;
 }
 
-.chat_display {
+.display {
   position: absolute;
   left: 0;
   right: 0;
@@ -19,7 +19,7 @@
   overflow-y: auto;
 }
 
-.chat_sender {
+.sender {
   position: absolute;
   left: 0;
   right: 0;

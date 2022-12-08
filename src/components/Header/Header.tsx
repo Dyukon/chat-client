@@ -2,7 +2,7 @@ import React from 'react'
 import { clearAuthInfo, logout, selectAuthToken, selectUserName } from '../../features/auth/auth.slice'
 import { useAppDispatch, useAppSelector } from '../../hooks'
 import { Button } from 'antd'
-import './Header.css'
+import styles from './Header.module.css'
 import HeaderProps from './Header.props'
 import cn from 'classnames'
 
@@ -12,13 +12,13 @@ const Header: React.FC<HeaderProps & {className: string}> = (props) => {
   const dispatch = useAppDispatch()
 
   return (
-    <div className={cn("header_wrapper", props.className)}>
+    <div className={cn(styles.wrapper, props.className)}>
 
-      {userName && <div className='header_username'>
+      {userName && <div className={styles.username}>
         {userName}
       </div>}
 
-      <div className="header_logout">
+      <div className={styles.logout}>
         {authToken && <Button
           color="secondary"
           onClick={() => {
