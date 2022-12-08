@@ -10,7 +10,7 @@ import {
 import PresenceNote from '../PresenceNote/PresenceNote'
 import { PresenceEvent } from '../PresenceNote/PresenceNote.props'
 
-const MessageDisplay: React.FC<MessageDisplayProps> = (props) => {
+const MessageDisplay: React.FC<MessageDisplayProps & {className: string}> = (props) => {
   const [events, setEvents] = useState<Event[]>([])
 
   const bottomRef = useRef<null | HTMLDivElement>(null)

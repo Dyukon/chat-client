@@ -7,7 +7,7 @@ import cn from 'classnames'
 import React, { useEffect } from 'react'
 import { useCreateJoinEventMutation, useCreateLeaveEventMutation } from '../../generated/schema'
 
-const Chat: React.FC<ChatProps> = (props) => {
+const Chat: React.FC<ChatProps & {className: string}> = (props) => {
 
   const [doJoin] = useCreateJoinEventMutation()
   const [doLeave] = useCreateLeaveEventMutation()

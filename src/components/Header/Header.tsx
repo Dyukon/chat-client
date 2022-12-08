@@ -6,7 +6,7 @@ import './Header.css'
 import HeaderProps from './Header.props'
 import cn from 'classnames'
 
-const Header: React.FC<HeaderProps> = (props) => {
+const Header: React.FC<HeaderProps & {className: string}> = (props) => {
   const authToken = useAppSelector(selectAuthToken)
   const userName = useAppSelector(selectUserName)
   const dispatch = useAppDispatch()

@@ -5,7 +5,7 @@ import MessageSenderProps from './MessageSender.props'
 import './MessageSender.css'
 import cn from 'classnames'
 
-const MessageSender: React.FC<MessageSenderProps> = (props) => {
+const MessageSender: React.FC<MessageSenderProps & {className: string}> = (props) => {
 
   const [formState, setFormState] = useState({
     message: '',
