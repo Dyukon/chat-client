@@ -9,17 +9,17 @@ import { useCreateJoinEventMutation, useCreateLeaveEventMutation } from '../../g
 
 const Chat: React.FC<ChatProps & {className: string}> = (props) => {
 
-  const [doJoin] = useCreateJoinEventMutation()
-  const [doLeave] = useCreateLeaveEventMutation()
+  const [createJoinEvent] = useCreateJoinEventMutation()
+  const [createLeaveEvent] = useCreateLeaveEventMutation()
 
   useEffect(() => {
-    console.log(`Chat mounted`)
-    doJoin()
+    createJoinEvent()
+      .catch(err => console.error(err))
     return () => {
-      console.log(`Chat unmounted`)
-      doLeave()
+      createLeaveEvent()
+        .catch(err => console.error(err))
     }
-  }, [doJoin, doLeave])
+  }, [createJoinEvent, createLeaveEvent])
 
   return (
     <div className={cn(styles.wrapper, props.className)}>

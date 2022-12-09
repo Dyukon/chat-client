@@ -1,48 +1,59 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import MessageDisplayProps from './MesageDisplay.props'
 import styles from './MessageDisplay.module.css'
 import cn from 'classnames'
 import ChatMessage from '../ChatMessage/ChatMessage'
 import {
-  Event, EventType, useGetEventsQuery,
-  useOnEventAddedSubscription,
+  EventType, OnEventAddedDocument, useGetEventsQuery,
 } from '../../../generated/schema'
 import PresenceNote from '../PresenceNote/PresenceNote'
 import { PresenceEvent } from '../PresenceNote/PresenceNote.props'
 
 const MessageDisplay: React.FC<MessageDisplayProps & {className: string}> = (props) => {
-  const [events, setEvents] = useState<Event[]>([])
-
   const bottomRef = useRef<null | HTMLDivElement>(null)
 
-  useGetEventsQuery({
-    onCompleted: ({ events }) => {
-      console.log(`onCompleted - events: ${JSON.stringify(events)}`)
-      setEvents(events)
-    },
-  })
+  const [eventCount, setEventCount] = useState(0)
 
-  useOnEventAddedSubscription({
-    onData: ({ data }: any) => {
-      console.log(`onData - data: ${JSON.stringify(data)}`)
-      setEvents([
-        ...events,
-        data.data?.eventAdded
-      ])
+  const { subscribeToMore, loading, error, data } = useGetEventsQuery({
+    onCompleted: ({ events }) => {
+      setEventCount(events.length)
     }
   })
+
+  const subscribeToNewEvents = useCallback(() => {
+    subscribeToMore({
+      document: OnEventAddedDocument,
+      updateQuery: (prev, { subscriptionData }: any) => {
+        if (!subscriptionData) {
+          return prev
+        }
+        const next = {
+          events: [...prev.events, subscriptionData.data.eventAdded]
+        }
+        return next
+      }
+    })
+  }, [subscribeToMore])
 
   useEffect(() => {
-    console.log(`MessageDisplay is mounted`)
+    subscribeToNewEvents()
+  }, [subscribeToNewEvents])
+
+  useEffect(() => {
     bottomRef.current?.scrollIntoView()
-    return () => {
-      console.log(`MessageDisplay is unmounted`)
-    }
-  }, [events])
+  }, [eventCount])
+
+  if (loading) {
+    return <div>{`Loading...`}</div>
+  }
+
+  if (error) {
+    return <div>{`Error: ${error}`}</div>
+  }
 
   return (
     <div className={cn(styles.wrapper, props.className)}>
-      {events.map(event => {
+      {data!.events.map(event => {
         if (event.type===EventType.Message) {
           return <ChatMessage
             key={event.id}

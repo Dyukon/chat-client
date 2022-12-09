@@ -30,7 +30,6 @@ const Login: React.FC<LoginProps> = (props) => {
     onCompleted: ({ createUser }) => {
       const accessToken = createUser.accessToken
       const user = createUser.user
-      console.log(`createUser completed - accessToken: ${accessToken}, user: ${JSON.stringify(user)}`)
       dispatch(login({
         accessToken,
         userId: user.id,
@@ -53,7 +52,6 @@ const Login: React.FC<LoginProps> = (props) => {
     onCompleted: ({ loginUser }) => {
       const accessToken = loginUser.accessToken
       const user = loginUser.user
-      console.log(`loginUser completed - accessToken: ${accessToken}, user: ${JSON.stringify(user)}`)
       dispatch(login({
         accessToken: accessToken,
         userId: user.id,

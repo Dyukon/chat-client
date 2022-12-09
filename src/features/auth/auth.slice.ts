@@ -25,8 +25,6 @@ export const authSlice = createSlice({
       const userId = action.payload.userId
       const userName = action.payload.userName
 
-      console.log(`login action - payload: ${JSON.stringify(action.payload)}`)
-
       return {
         ...state,
         isLoggedIn: true,
@@ -36,14 +34,12 @@ export const authSlice = createSlice({
       }
     },
     logout: (state) => {
-      console.log(`logout action`)
       return {
         ...state,
         isLoggedIn: false
       }
     },
     clearAuthInfo: (state) => {
-      console.log(`clearAuthInfo action`)
       return {
         ...state,
         isLoggedIn: false,

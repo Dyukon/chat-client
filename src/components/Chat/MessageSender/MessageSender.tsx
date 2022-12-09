@@ -18,7 +18,6 @@ const MessageSender: React.FC<MessageSenderProps & {className: string}> = (props
       message: formState.messageToSend
     },
     onCompleted: ({ createEvent }) => {
-      console.log(`createEvent completed - result: ${JSON.stringify(createEvent)}`)
       setFormState({
         ...formState,
         message: '',

@@ -22,7 +22,6 @@ const Header: React.FC<HeaderProps & {className: string}> = (props) => {
         {authToken && <Button
           color="secondary"
           onClick={() => {
-            console.log(`Logout clicked`)
             dispatch(logout())
             setTimeout(() => {
               dispatch(clearAuthInfo())
