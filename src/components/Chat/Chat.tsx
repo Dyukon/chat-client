@@ -21,6 +21,18 @@ const Chat: React.FC<ChatProps & {className: string}> = (props) => {
     }
   }, [createJoinEvent, createLeaveEvent])
 
+  useEffect(() => {
+    const unloadCallback = () => {
+      createLeaveEvent()
+        .catch(() => {}) // ignore leave event duplication error
+    }
+    window.addEventListener('beforeunload', unloadCallback)
+
+    return () => {
+      window.removeEventListener('beforeunload', unloadCallback)
+    }
+  }, [createLeaveEvent])
+
   return (
     <div className={cn(styles.wrapper, props.className)}>
       <ChatHeader className={styles.header}/>

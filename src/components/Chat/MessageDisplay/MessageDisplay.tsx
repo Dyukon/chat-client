@@ -4,7 +4,7 @@ import styles from './MessageDisplay.module.css'
 import cn from 'classnames'
 import ChatMessage from '../ChatMessage/ChatMessage'
 import {
-  EventType, OnEventAddedDocument, useGetEventsQuery,
+  Event, EventType, OnEventAddedDocument, useGetEventsQuery, useOnEventAddedSubscription,
 } from '../../../generated/schema'
 import PresenceNote from '../PresenceNote/PresenceNote'
 import { PresenceEvent } from '../PresenceNote/PresenceNote.props'
@@ -21,11 +21,11 @@ const MessageDisplay: React.FC<MessageDisplayProps & {className: string}> = (pro
   })
 
   useEffect(() => {
-    subscribeToMore({
+    subscribeToMore<Event>({
       document: OnEventAddedDocument,
-      updateQuery: (prev, { subscriptionData }: any) => {
+      updateQuery: (prev, { subscriptionData }) => {
         return subscriptionData ? {
-          events: [...prev.events, subscriptionData.data.eventAdded]
+          events: [...prev.events, subscriptionData.data]
         } : prev
       }
     })
