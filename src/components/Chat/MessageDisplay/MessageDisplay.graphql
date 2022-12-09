@@ -1,7 +1,5 @@
 query GetEvents {
-  events(params: {
-    type: MESSAGE
-  }) {
+  events(params: {}) {
     id
     type
     createdAt

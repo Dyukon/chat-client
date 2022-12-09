@@ -14,10 +14,10 @@ const Chat: React.FC<ChatProps & {className: string}> = (props) => {
 
   useEffect(() => {
     createJoinEvent()
-      .catch(err => console.error(err))
+      .catch(() => {}) // ignore join event duplication error
     return () => {
       createLeaveEvent()
-        .catch(err => console.error(err))
+        .catch(() => {}) // ignore leave event duplication error
     }
   }, [createJoinEvent, createLeaveEvent])
 

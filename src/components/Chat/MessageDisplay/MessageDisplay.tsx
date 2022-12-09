@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import MessageDisplayProps from './MesageDisplay.props'
 import styles from './MessageDisplay.module.css'
 import cn from 'classnames'
@@ -20,24 +20,16 @@ const MessageDisplay: React.FC<MessageDisplayProps & {className: string}> = (pro
     }
   })
 
-  const subscribeToNewEvents = useCallback(() => {
+  useEffect(() => {
     subscribeToMore({
       document: OnEventAddedDocument,
       updateQuery: (prev, { subscriptionData }: any) => {
-        if (!subscriptionData) {
-          return prev
-        }
-        const next = {
+        return subscriptionData ? {
           events: [...prev.events, subscriptionData.data.eventAdded]
-        }
-        return next
+        } : prev
       }
     })
   }, [subscribeToMore])
-
-  useEffect(() => {
-    subscribeToNewEvents()
-  }, [subscribeToNewEvents])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView()

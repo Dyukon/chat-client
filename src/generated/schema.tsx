@@ -228,7 +228,7 @@ export type CreateLeaveEventMutationResult = Apollo.MutationResult<CreateLeaveEv
 export type CreateLeaveEventMutationOptions = Apollo.BaseMutationOptions<CreateLeaveEventMutation, CreateLeaveEventMutationVariables>;
 export const GetEventsDocument = gql`
     query GetEvents {
-  events(params: {type: MESSAGE}) {
+  events(params: {}) {
     id
     type
     createdAt
