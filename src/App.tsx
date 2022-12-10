@@ -5,7 +5,6 @@ import Login from './components/Login/Login'
 import Chat from './components/Chat/Chat'
 import Header from './components/Header/Header'
 import { useAppSelector } from './hooks'
-import './App.css'
 import { selectAuthIsLoggedIn } from './features/auth/auth.slice'
 
 function App() {
